@@ -1,7 +1,10 @@
-package id.ac.unhas.noteapp.db
+package id.ac.unhas.noteapp.database
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import id.ac.unhas.noteapp.db.AppDatabase
+import id.ac.unhas.noteapp.db.Note
+import id.ac.unhas.noteapp.db.NoteDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -12,7 +15,8 @@ class NoteRepository(application: Application) {
     private var notes: LiveData<List<Note>>? = null
 
     init {
-        val db = AppDatabase.getInstance(application.applicationContext)
+        val db =
+            AppDatabase.getInstance(application.applicationContext)
         noteDao = db?.noteDao()
         notes = noteDao?.getNotes()
     }
